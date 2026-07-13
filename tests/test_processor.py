@@ -1,8 +1,8 @@
 import pandas as pd
 
-from data import applications, data, output
-from processor import Processor
-from request import request
+from src.data import applications, data, output
+from app.processor import Processor
+from src.request import request
 
 
 def test_get_data_matches_output():
