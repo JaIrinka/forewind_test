@@ -24,15 +24,22 @@ poetry run pytest tests/
 ## Usage
 
 ```
-poetry run python app/process.py <data> <application>
+poetry run python app/process.py <data> <application> [-o {short,table,json,csv}]
 ```
+
+Both `<data>` and `<application>` are paths to `.b64`-encoded data files (see
+`src/data.b64` / `src/applications.b64` for the expected format).
+
+`-o`/`--output` selects the output format (default: `short`):
+
+- `short` — pandas' default truncated table representation.
+- `table` — full bordered table (via `tabulate`).
+- `json` — JSON records.
+- `csv` — CSV.
 
 Example:
 
 ```
 poetry run python app/process.py src/data.b64 src/applications.b64
+poetry run python app/process.py src/data.b64 src/applications.b64 -o table
 ```
-
-Both `<data>` and `<application>` are paths to `.b64`-encoded data files (see
-`src/data.b64` / `src/applications.b64` for the expected format). The command prints the
-resulting table to stdout.

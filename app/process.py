@@ -8,6 +8,7 @@ import base64
 
 import numpy as np
 import pandas as pd
+from tabulate import tabulate
 
 from app.processor import Processor
 from src.request import request
@@ -29,9 +30,18 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description="Run Processor.get_data over .b64-encoded data files")
     parser.add_argument("data", help="Path to a .b64 file encoding the data DataFrame (see src/data.b64)")
     parser.add_argument("application", help="Path to a .b64 file encoding the applications DataFrame (see src/applications.b64)")
+    parser.add_argument("-o", "--output", choices=["short", "table", "json", "csv"], default="short", help="Output format (default: short)")
     args = parser.parse_args(argv)
     result = build_result(args.data, args.application)
-    print(result)
+
+    if args.output == "table":
+        print(tabulate(result, headers="keys", tablefmt="psql"))
+    elif args.output == "json":
+        print(result.to_json(orient="records", indent=4, force_ascii=False))
+    elif args.output == "csv":
+        print(result.to_csv(index=False))
+    else:
+        print(result)
 
 
 if __name__ == "__main__":
