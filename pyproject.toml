@@ -1,10 +1,3 @@
-# Setup:
-#   pip install poetry           # if not already installed
-#   poetry lock                  # generate poetry.lock from this file
-#   poetry install               # create the Poetry-managed venv and install deps
-#   poetry run pytest tests/     # run tests inside the Poetry venv
-#   poetry run python processor.py
-
 [tool.poetry]
 name = "forewind-test"
 version = "0.1.0"
@@ -15,7 +8,7 @@ package-mode = false
 [tool.poetry.dependencies]
 python = "^3.12"
 numpy = "1.26.4"
-pandas = "*"
+pandas = "2.3.3"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "9.1.1"
